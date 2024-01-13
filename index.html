@@ -54,11 +54,10 @@
         toDoList=JSON.parse(localStorage.getItem('todos'))
 
 
-
-        if(toDoList.length>0){
+        if(toDoList?.length>0){
 
         let oldTodos=''
-         toDoList.forEach((e)=>{
+        toDoList.forEach((e)=>{
             
         oldTodos+=
         `<div class='todo'>
@@ -82,13 +81,15 @@
 
         container.addEventListener('click',(e)=>{
             if(!e.target.classList.contains('delBut')) return
+
             const todo=e.target.closest('.todo')
             const text=todo.querySelector('.pText').innerText
+
             container.removeChild(todo)
             // filter
             // console.log(text)
-            toDoList=toDoList.filter((e)=>e.text!==text)
-
+            toDoList=toDoList.filter((e)=>e.text.trim()!==text)
+            
             localStorage.setItem('todos',JSON.stringify(toDoList))
 
             // const c= [12,13,14,15,16].filter((i)=>i>12)
@@ -103,8 +104,10 @@
                 const todo={}
                 todo.text=e.target.value
                 todo.checked=e.target.closest('.todo').querySelector('.check').checked
+
                 e.target.previousElementSibling.textContent=todo.text
                 e.target.style.display='none'
+
                 toDoList.push(todo)
 
                 localStorage.setItem('todos',JSON.stringify(toDoList))
