@@ -25,12 +25,24 @@
         overflow: hidden;
     }
 
+    h1{
+        font-size: 3rem;
+    }
+
+    button{
+        padding: 0;
+        /* height: 2rem; */
+        width: 3rem;
+        font-size: 3rem;
+        
+    }
+
 </style>
 <body>
     <h1>A TODO is to DO</h1>
     <div class="div">
 
-    <button class="addBut">add</button>
+    <button class="addBut">+</button>
 
     </div>
 <!-- 
@@ -45,17 +57,17 @@
             <input type="checkbox" class='check'>
             <p class="pText"></p>
             <input type="text" class="text" placeholder="I want to do ...">
-            <button class='delBut'>del</button>
+            <button class='delBut'>-</button>
         </div>`
         const addBut=document.querySelector('.addBut')
         const container=document.querySelector('.div')
         let toDoList=[]
 
-        toDoList=JSON.parse(localStorage.getItem('todos'))
+        toDoList=JSON.parse(localStorage.getItem('todos')) || []
 
 
 
-        if(toDoList?.length>0){
+        if(toDoList.length>0){
 
         let oldTodos=''
         toDoList.forEach((e)=>{
@@ -64,7 +76,7 @@
         `<div class='todo'>
             <input type="checkbox" class='check' ${e.checked?'checked':''}>
             <p class="pText">${e.text}</p>
-            <button class='delBut'>del</button>
+            <button class='delBut'>-</button>
         </div>`
         })
         
@@ -117,9 +129,6 @@
 
         
         })
-
-
-
 
     </script>
 </body>
