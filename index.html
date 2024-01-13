@@ -32,9 +32,12 @@
     button{
         padding: 0;
         /* height: 2rem; */
-        width: 3rem;
+        width: auto;
         font-size: 3rem;
-        
+        object-fit:fill;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 
 </style>
@@ -44,7 +47,7 @@
 
 
     </div>
-    <button class="addBut">+</button>
+    <button class="addBut">➕</button>
 
 <!-- 
     <input type="checkbox" class='check' checked>
@@ -58,7 +61,7 @@
             <input type="checkbox" class='check'>
             <p class="pText"></p>
             <input type="text" class="text" placeholder="I want to do ...">
-            <button class='delBut'>-</button>
+            <button class='delBut'>🗑️</button>
         </div>`
         const addBut=document.querySelector('.addBut')
         const container=document.querySelector('.div')
@@ -77,7 +80,7 @@
         `<div class='todo'>
             <input type="checkbox" class='check' ${e.checked?'checked':''}>
             <p class="pText">${e.text}</p>
-            <button class='delBut'>-</button>
+            <button class='delBut'>🗑️</button>
         </div>`
         })
         
