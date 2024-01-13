@@ -42,9 +42,10 @@
     <h1>A TODO is to DO</h1>
     <div class="div">
 
-    <button class="addBut">+</button>
 
     </div>
+    <button class="addBut">+</button>
+
 <!-- 
     <input type="checkbox" class='check' checked>
     <input type="text" class="text" value=" this is javascript"> -->
@@ -86,7 +87,7 @@
 
 
         addBut.addEventListener('click',()=>{
-            container.insertAdjacentHTML('afterbegin',html)
+            container.insertAdjacentHTML('beforeend',html)
 
         })
 
