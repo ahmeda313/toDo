@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tudum</title>
+</head>
+<style>
+    .todo{
+        display: flex;
+        border: 1px solid black;
+        width: 300px;
+        justify-content: space-around;
+        margin: 10px;
+    }
+    .check:checked + .pText{
+        text-decoration: line-through;
+    }
+
+    .text{
+        width: 150px;
+        height: auto;
+        border:none;
+        background: none;
+        overflow: hidden;
+    }
+
+</style>
+<body>
+    <h1>A TODO is to DO</h1>
+    <div class="div">
+
+    <button class="addBut">add</button>
+
+    </div>
+<!-- 
+    <input type="checkbox" class='check' checked>
+    <input type="text" class="text" value=" this is javascript"> -->
+
+
+    
+    <script>
+        const html=`
+        <div class='todo'>
+            <input type="checkbox" class='check'>
+            <p class="pText"></p>
+            <input type="text" class="text" placeholder="I want to do ...">
+            <button class='delBut'>del</button>
+        </div>`
+        const addBut=document.querySelector('.addBut')
+        const container=document.querySelector('.div')
+        let toDoList=[]
+
+        toDoList=JSON.parse(localStorage.getItem('todos'))
+
+
+
+        if(toDoList.length>0){
+
+        let oldTodos=''
+         toDoList.forEach((e)=>{
+            
+        oldTodos+=
+        `<div class='todo'>
+            <input type="checkbox" class='check' ${e.checked?'checked':''}>
+            <p class="pText">${e.text}</p>
+            <button class='delBut'>del</button>
+        </div>`
+        })
+        
+        container.insertAdjacentHTML('afterbegin',oldTodos)
+    }
+
+
+
+        addBut.addEventListener('click',()=>{
+            container.insertAdjacentHTML('afterbegin',html)
+
+        })
+
+
+
+        container.addEventListener('click',(e)=>{
+            if(!e.target.classList.contains('delBut')) return
+            const todo=e.target.closest('.todo')
+            const text=todo.querySelector('.pText').innerText
+            container.removeChild(todo)
+            // filter
+            // console.log(text)
+            toDoList=toDoList.filter((e)=>e.text!==text)
+
+            localStorage.setItem('todos',JSON.stringify(toDoList))
+
+            // const c= [12,13,14,15,16].filter((i)=>i>12)
+            // console.log(c)
+
+        })
+
+        document.body.addEventListener('keydown',(e)=>{
+            if(!e.target.classList.contains('text')) return
+            if(e.key !=='Enter') return
+            else{
+                const todo={}
+                todo.text=e.target.value
+                todo.checked=e.target.closest('.todo').querySelector('.check').checked
+                e.target.previousElementSibling.textContent=todo.text
+                e.target.style.display='none'
+                toDoList.push(todo)
+
+                localStorage.setItem('todos',JSON.stringify(toDoList))
+                
+            }     
+
+        
+        })
+
+
+
+
+    </script>
+</body>
+</html>
